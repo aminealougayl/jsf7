@@ -101,33 +101,27 @@
                                     <p:rowEditor />
                                 </p:column>
                                 <p:column headerText="Supprimer">
-                                    <p:commandButton id="Supprimer" icon="ui-icon-trash"
-                                                     update=":supp:confirmDialog" oncomplete="confirmation.show()"
-                                                     title="Supprimer">
-                                        <f:setPropertyActionListener target="#{salleBean.salle}"
-                                                                     value="#{s}" />
+                                    
+                                    
+                                    <p:commandButton id="delete"
+                                            actionListener="#{salleBean.onDeleteAction(s)}"
+                                            icon="ui-icon-trash"
+                                            title="Delete">
+                                            <p:confirm header="Supprimer une Salle"
+                                                    message="Etes vous sûr de vouloir supprimer cette Salle ?" />
                                     </p:commandButton>
+
+                                    <p:confirmDialog global="true" showEffect="fade"
+                                            hideEffect="explode">
+                                            <p:commandButton title="Yes" value="Oui"
+                                                    styleClass="ui-confirmdialog-yes" />
+                                            <p:commandButton title="No" value="Non"
+                                                    styleClass="ui-confirmdialog-no" />
+                                    </p:confirmDialog>
+                                    
+                                 
                                 </p:column>
                             </p:dataTable>  
-                        </h:form>
-                        <h:form id="supp">
-                            <p:dialog id="confirmDialog" showEffect="fade"
-                                      header="Suppression d'une salle" 
-                                      widgetVar="confirmation">
-                                <p:growl id="messages" showDetail="true" sticky="true"
-                                         life="4000" />
-                                <h:inputHidden value="#{salleBean.salle.id}" id="supp"
-                                               required="true" />
-                                <p:outputLabel value="#{salleBean.salle.id}" />
-                                <p:outputLabel
-                                    value="Etes vous sûr de vouloir supprimer cette Salle ?" />
-                                <p:commandButton id="confirm" value="Oui"
-                                                 update=":f2:tab" oncomplete="confirmation.hide()"
-                                                 actionListener="#{salleBean.onDeleteAction}" />
-                                <p:commandButton id="decline" value="Non"
-                                                 onclick="confirmation.hide()" type="button" />
-
-                            </p:dialog>
                         </h:form>
 
 

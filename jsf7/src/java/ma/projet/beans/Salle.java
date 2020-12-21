@@ -6,6 +6,7 @@
 package ma.projet.beans;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class Salle {
     private int id;
     private String code;
     private String libelle;
-    @OneToMany (mappedBy = "salle",fetch = FetchType.EAGER)
+    @OneToMany (mappedBy = "salle",fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
     private List<Machine> machines;
 
     public Salle() {

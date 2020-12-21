@@ -74,10 +74,18 @@ public class SalleBean {
         return null;
     }
 
-    public void onDeleteAction() {
+    public void onDeleteAction(final Salle salle) {
+        deleteMachines(salle.getMachines());
         salle.setMachines(null);
         salleService.delete(salle);
 
+    }
+    
+    private void deleteMachines(final List<Machine> machines) {
+         for (Machine machine : machines) {
+            machine.setSalle(null);
+            machineService.delete(machine);
+        }
     }
 
     public void onEdit(RowEditEvent event) {
