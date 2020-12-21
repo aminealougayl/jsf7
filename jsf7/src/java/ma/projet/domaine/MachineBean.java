@@ -6,6 +6,8 @@
 
 package ma.projet.domaine;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import ma.projet.beans.Machine;
@@ -27,6 +29,9 @@ public class MachineBean {
     private List <Machine> machines;
     private MachineService machineService;
     private SalleService salleService;
+
+    private Date dateFrom;
+    private Date dateTo;
 
     public MachineBean() {
         machine = new Machine();
@@ -79,6 +84,23 @@ public class MachineBean {
         
        
     }
+     
+    public List<Machine> filterDates(){
+        machines = findMachines(dateFrom, dateTo);
+        return machines;
+    }
+    
+    private List<Machine> findMachines(Date startDate, Date endDate) {
+        List<Machine> filterMachines = new ArrayList<>();
+        if(startDate != null && endDate != null){
+            if(startDate.before(endDate)){
+                filterMachines.addAll(machineService.getBetweenDates(startDate,endDate));
+                return filterMachines;
+            }
+        }
+        return machines;
+    }
+    
       public void load(){
           System.out.println(salle.getLibelle());
         salle = salleService.getById(salle.getId());
@@ -94,4 +116,20 @@ public class MachineBean {
      
     public void onCancel(RowEditEvent event) {
    }
+    
+    public Date getDateFrom() {
+        return dateFrom;
+    }
+
+    public void setDateFrom(Date dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+    
+    public Date getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(Date dateTo) {
+        this.dateTo = dateTo;
+    }
 }

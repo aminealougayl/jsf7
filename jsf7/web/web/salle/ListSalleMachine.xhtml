@@ -65,6 +65,28 @@
                             </p:panelGrid>
                         </p:panel>
                     </h:form>
+                    
+                    <h:form id="form4">
+                        <p:panel header="Recherche par date">
+                            
+                            <p:panelGrid columns="8">
+                                <h:outputText value="Date début" />
+                                <p:calendar id="idStartDate" showOn="button" title="Date début" size="6" value="#{machineBean.dateFrom}"
+                                            navigator="true" showButtonPanel="true" pattern="dd/MM/yyyy">
+                                    <p:ajax event="dateSelect" update="idEndDate"/>
+                                </p:calendar>
+                                <h:outputText value="Date fin" />
+                                <p:calendar id="idEndDate" showOn="button" title="Date fin" size="6" value="#{machineBean.dateTo}" mindate="#{machineBean.dateFrom}" 
+                                            navigator="true" showButtonPanel="true" pattern="dd/MM/yyyy" >
+                                    <p:ajax event="dateSelect"/>
+                                </p:calendar>
+                                <p:commandButton id="btnDateFilter" value="Filtre" update=":form:tab" action="#{machineBean.filterDates()}"/>
+                            </p:panelGrid>
+                          
+                        </p:panel>
+                       
+                    </h:form>
+                    
                       <h:form id="form">
 
                         <p:growl id="messages" showDetail="true"/>

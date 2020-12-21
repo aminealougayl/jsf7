@@ -6,7 +6,6 @@
 package ma.projet.beans;
 
 import java.util.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -24,7 +23,7 @@ public class Machine {
     private double prix;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateAchat;
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     private Salle salle;
 
     public Machine() {

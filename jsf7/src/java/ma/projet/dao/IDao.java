@@ -5,6 +5,7 @@
  */
 package ma.projet.dao;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,5 +23,7 @@ public interface IDao<T> {
     T getById(int id);
 
     List<T> getAll();
+    
+    List<T> getBetweenDates(Date startDate, Date endDate);
 
 }

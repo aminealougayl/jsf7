@@ -6,6 +6,7 @@
 
 package ma.projet.service;
 
+import java.util.Date;
 import java.util.List;
 import ma.projet.beans.Salle;
 import ma.projet.dao.IDao;
@@ -61,6 +62,11 @@ public class SalleService implements IDao<Salle>{
         salles  = session.createQuery("from Salle").list();
         session.getTransaction().commit();
         return salles;
+    }
+
+    @Override
+    public List<Salle> getBetweenDates(Date startDate, Date endDate) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

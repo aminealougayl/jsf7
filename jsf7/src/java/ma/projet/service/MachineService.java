@@ -6,10 +6,12 @@
 
 package ma.projet.service;
 
+import java.util.Date;
 import java.util.List;
 import ma.projet.beans.Machine;
 import ma.projet.dao.IDao;
 import ma.projet.util.HibernateUtil;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
@@ -63,6 +65,19 @@ public class MachineService implements IDao<Machine>{
         Session session  = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         machines  = session.createQuery("from Machine").list();
+        session.getTransaction().commit();
+        return machines;
+    }
+
+    @Override
+    public List<Machine> getBetweenDates(Date startDate, Date endDate) {
+        List <Machine> machines = null;
+        Session session  = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query query  = session.createQuery("from Machine where dateAchat between :startDate and :endDate"); 
+        query.setDate("startDate",startDate);
+        query.setDate("endDate",endDate);
+        machines = query.list();
         session.getTransaction().commit();
         return machines;
     }
